@@ -2,8 +2,24 @@
 pragma solidity >=0.4.22 <0.9.0;
 
 contract Faucet {
-    // storage variables
-    uint public funds = 1000; // positive values only
-    int public counter = -10; // negative values or positive values
-    uint32 public test = 4294967295; // uint32 max value
+
+    address[] public funders;
+
+
+    receive() external payable {}
+    
+    function addFunds() external payable {
+        funders.push(msg.sender);
+    }
+
+    function getAllFunders() public view returns (address[] memory) {
+        return funders;
+    }
+
+    function getFunderAtIndex(uint256 index) external view returns (address) {
+        // with this. keyword, we can access the contract's state and call the functions even if they are not public
+        address[] memory _funders = getAllFunders();
+
+        return _funders[index];
+    }
 }
