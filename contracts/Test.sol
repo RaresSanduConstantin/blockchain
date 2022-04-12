@@ -9,6 +9,7 @@ contract Test {
             let _fmp := mload(0x40)
         }
 
+        uint8[3] memory items = [1, 2, 3];
 
         return testNum;
     }
